@@ -938,6 +938,15 @@ describe.onServer('Remote Methods', function() {
         });
     });
 
+    it('sets options.remotingContext', function(done) {
+      request(app).get('/TestModels/saveOptions')
+        .expect(204, function(err) {
+          if (err) return done(err);
+          expect(actualOptions).to.have.property('remotingContext');
+          done();
+        });
+    });
+
     it('sets options.accessToken for authorized requests', function(done) {
       request(app).get('/TestModels/saveOptions')
         .set('Authorization', accessToken.id)
